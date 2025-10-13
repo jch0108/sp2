@@ -79,7 +79,7 @@ void loop() {
   dist_ema = (1 - _EMA_ALPHA) * dist_ema + _EMA_ALPHA * dist_filtered;
 
   // add your code here!
-  // ✅ 거리 → 각도 선형 매핑 (18cm=0°, 36cm=180°)
+  //  거리 -> 각도 선형 매핑 (18cm=0°, 36cm=180°)
   float angle_deg;
   if (dist_ema <= _DIST_MIN)       angle_deg = 0.0;
   else if (dist_ema >= _DIST_MAX)  angle_deg = 180.0;
@@ -90,7 +90,7 @@ void loop() {
   int duty = (int)(_DUTY_MIN + (angle_deg / 180.0) * (_DUTY_MAX - _DUTY_MIN));
   myservo.writeMicroseconds(duty);
 
-  // ✅ 범위 안으로 들어오면 LED 점등(Active-Low: LOW=켜짐), 범위 밖은 소등
+  //  범위 안으로 들어오면 LED 점등(Active-Low: LOW=켜짐), 범위 밖은 소등
   digitalWrite(PIN_LED, in_range_now ? LOW : HIGH);
 
   // output the distance to the serial port
@@ -114,3 +114,4 @@ float USS_measure(int TRIG, int ECHO)
   
   return pulseIn(ECHO, HIGH, TIMEOUT) * SCALE; // unit: mm
 }
+
